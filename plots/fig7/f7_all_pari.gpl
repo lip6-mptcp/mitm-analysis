@@ -1,0 +1,18 @@
+# set terminal pngcairo  transparent enhanced font "arial,10" fontscale 1.0 size 600, 200
+set output 'f7_all_pair.png'
+
+# set box plot width size
+set terminal png size 1920,1080 noenhanced font "Helvetica,20"
+
+# y label, offset to make space between y label and plot: left/right, up/down
+set ylabel "Cumulative probability"
+set xlabel "MiTM robustness metric"
+set tics font ",12"
+set ylabel font ",15"
+set key off
+# set arange value of y (from 0)
+stats "all_pair.dat" u 2 noout
+set yrange[0:1]
+set ytics 0.1
+plot "all_pair.dat" u 2:(1./STATS_records) smooth cumulative notitle
+
